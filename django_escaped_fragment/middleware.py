@@ -19,14 +19,13 @@ for (i=metaTags.length-1; i>=0; i--) {
 class EscapedFragmentMiddleware(object):
 
     def get_driver_data(self, url, use_cache=True):
-        driver = selenium.webdriver.PhantomJS(port=crawler_settings['PHANTOMJS_PORT'])
-        if use_cache:
+        if use_cache is True:
             content = cache.get(url)
             if content:
                 return content
 
+        driver = selenium.webdriver.PhantomJS(port=crawler_settings['PHANTOMJS_PORT'])
         driver.get(url)
-
         if crawler_settings['DELETE_FRAGMENT_FROM_RENDERED'] is True:
             driver.execute_script(script)
 
